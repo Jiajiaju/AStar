@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="20" tileheight="20" nextobjectid="1">
+ <tileset firstgid="1" name="tiled" tilewidth="20" tileheight="20">
+  <image source="tiled.png" width="40" height="20"/>
+  <tile id="0">
+   <properties>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="walkable" value="0"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="walkable" width="100" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAAwqDbv7RFYGPVVFVVVVVVVVVVVVVVVVVVVVVVVVVVVVXtbwUXcQ==
+  </data>
+ </layer>
+</map>
