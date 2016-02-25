@@ -150,6 +150,9 @@
         <array>
             <filename>astar_walkable_false.png</filename>
             <filename>astar_walkable_true.png</filename>
+            <filename>astar_desert.png</filename>
+            <filename>astar_mountain.png</filename>
+            <filename>astar_ocean.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

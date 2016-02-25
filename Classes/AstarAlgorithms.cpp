@@ -7,8 +7,7 @@
 //
 
 #include "AstarAlgorithms.hpp"
-#include <algorithm>
-#include <math.h>
+
 
 int calculateGValue(int column, int row, AStarNode *currentNode, const AStarDataNode &beginNode, const AStarDataNode &targetNode){
     if (currentNode->row == row || currentNode->column == column){
@@ -16,6 +15,7 @@ int calculateGValue(int column, int row, AStarNode *currentNode, const AStarData
     }else {
         return 14;
     }
+    
 }
 
 int calculateHValueZero(int column, int row, AStarNode *currentNode, const AStarDataNode &beginNode, const AStarDataNode &targetNode){
@@ -106,6 +106,68 @@ void aStarDealNeighborNode(
     }
 }
 
+void aStarDealNeighborNode(
+                           const std::vector<std::vector<AStarDataNode>> &astarData,
+                           BinaryHeap<AStarNode *> &openList,
+                           std::vector<AStarNode *> &closeList,
+                           AStarNode *currentNode,
+                           const AStarDataNode &beginNode,
+                           const AStarDataNode &targetNode
+                           )
+{
+    int maxColumn = static_cast<int>(astarData.size());
+    int maxRow = static_cast<int>(astarData[0].size());
+    
+    for (int column = currentNode->column - 1; column < currentNode->column + 2; ++column){
+        for (int row = currentNode->row - 1; row < currentNode->row + 2; ++row){
+            //            printf("(%d, %d)", column, row);
+            if (column < 0 || column >= maxColumn || row < 0 || row >= maxRow){
+                continue;
+            }
+            
+            if (!astarData[column][row].walkable){
+                continue;
+            }
+            
+            bool isInCloseList = false;
+            for (std::vector<AStarNode *>::iterator iter = closeList.begin(); iter != closeList.end(); ++iter){
+                if (column == (*iter)->column && row == (*iter)->row){
+                    isInCloseList = true;
+                    break;
+                }
+            }
+            if (isInCloseList){
+                continue;
+            }
+            
+            cocos2d::EventCustom event("AddCheckNode");
+            AStarDataNode *testUserData = new (std::nothrow) AStarDataNode(column, row, true);
+            event.setUserData(testUserData);
+            cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&event);
+            
+            int GValue = currentNode->GValue + calculateGValue(column, row, currentNode, beginNode, targetNode);
+//            int HValue = calculateHValueZero(column, row, currentNode, beginNode, targetNode);
+            int HValue = calculateHValueManhattan(column, row, currentNode, beginNode, targetNode);
+//            int HValue = calculateHValueDiagonal(column, row, currentNode, beginNode, targetNode);
+//            int HValue = calculateHValueEuclid(column, row, currentNode, beginNode, targetNode);
+            int FValue = GValue + HValue;
+            
+            AStarNode *newNode = new (std::nothrow) AStarNode(column, row, FValue, GValue, HValue, currentNode);
+            AStarNode *nodeInOpenList = openList.isIn(newNode);
+            if (nodeInOpenList){
+                if (FValue < nodeInOpenList->FValue){
+                    nodeInOpenList->GValue = GValue;
+                    nodeInOpenList->HValue = HValue;
+                    nodeInOpenList->FValue = FValue;
+                    nodeInOpenList->parentNode = currentNode;
+                }
+            }else {
+                openList.insert(newNode);
+            }
+        }
+    }
+}
+
 std::vector<AStarDataNode> aStar(
                                  const std::vector<std::vector<AStarDataNode>> &astarData,
                                  const AStarDataNode &beginNode,
@@ -113,30 +175,35 @@ std::vector<AStarDataNode> aStar(
                                  )
 {
     
-    std::vector<AStarNode *> openList;
+//    std::vector<AStarNode *> openList;
+    BinaryHeap<AStarNode *> openList;
     std::vector<AStarNode *> closeList;
     
     AStarNode *beginAStarNode = new (std::nothrow) AStarNode(beginNode.column, beginNode.row, 0, 0, 0, nullptr);
     AStarNode *currentAStarNode;
-    openList.push_back(beginAStarNode);
+//    openList.push_back(beginAStarNode);
+    openList.insert(beginAStarNode);
     
     while (!openList.empty()){
         
-        currentAStarNode = openList[0];
-//        printf("Find Min\n");
-        for (std::vector<AStarNode *>::iterator iter = openList.begin(); iter != openList.end(); ++iter){
-//            (*iter)->print();
-            if (currentAStarNode->FValue > (*iter)->FValue){
-                currentAStarNode = (*iter);
-            }
-        }
         
-        for (std::vector<AStarNode *>::iterator iter = openList.begin(); iter != openList.end(); ++iter){
-            if (currentAStarNode->column == (*iter)->column && currentAStarNode->row == (*iter)->row){
-                openList.erase(iter);
-                break;
-            }
-        }
+        //找到最小的并删除它
+//        currentAStarNode = openList[0];
+//        for (std::vector<AStarNode *>::iterator iter = openList.begin(); iter != openList.end(); ++iter){
+//            if (currentAStarNode->FValue > (*iter)->FValue){
+//                currentAStarNode = (*iter);
+//            }
+//        }
+//        
+//        for (std::vector<AStarNode *>::iterator iter = openList.begin(); iter != openList.end(); ++iter){
+//            if (currentAStarNode->column == (*iter)->column && currentAStarNode->row == (*iter)->row){
+//                openList.erase(iter);
+//                break;
+//            }
+//        }
+        
+        
+        currentAStarNode = openList.getMin();
         
         if (currentAStarNode->column == targetNode.column && currentAStarNode->row == targetNode.row){
             std::vector<AStarDataNode> path;

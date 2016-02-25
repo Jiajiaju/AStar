@@ -4,6 +4,45 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>astar_desert.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{80,0},{20,20}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{20,20}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
+            <key>astar_mountain.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{60,0},{20,20}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{20,20}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
+            <key>astar_ocean.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{40,0},{20,20}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{20,20}}</string>
+                <key>sourceSize</key>
+                <string>{20,20}</string>
+            </dict>
             <key>astar_walkable_false.png</key>
             <dict>
                 <key>frame</key>
@@ -38,9 +77,9 @@
             <key>realTextureFileName</key>
             <string>tiled.png</string>
             <key>size</key>
-            <string>{40,20}</string>
+            <string>{100,20}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:358eac7403fb18949a58f473fba5e8eb:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:d2a6ae9fccbe7912fe32e3823fb38777:1/1$</string>
             <key>textureFileName</key>
             <string>tiled.png</string>
         </dict>

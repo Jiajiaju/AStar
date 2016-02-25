@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="20" tileheight="20" nextobjectid="1">
  <tileset firstgid="1" name="tiled" tilewidth="20" tileheight="20">
-  <image source="tiled.png" width="40" height="20"/>
+  <image source="tiled.png" width="100" height="20"/>
   <tile id="0">
    <properties>
+    <property name="cost" value="0"/>
+    <property name="type" value="normal"/>
     <property name="walkable" value="1"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
+    <property name="cost" value="0"/>
+    <property name="type" value="normal"/>
     <property name="walkable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="cost" value="10"/>
+    <property name="type" value="ocean"/>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="cost" value="10"/>
+    <property name="type" value="mountain"/>
+    <property name="walkable" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="cost" value="10"/>
+    <property name="type" value="desert"/>
+    <property name="walkable" value="1"/>
    </properties>
   </tile>
  </tileset>
  <layer name="walkable" width="100" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwwENAAAAwqDbv7RFYGPVVFVVVVVVVVVVVVVVVVVVVVVVVVVVVVXtbwUXcQ==
+   eJzt0bEJwDAQwMB39h86Gxg3wYJccb1Aa2YWAACw9Ry43fgnfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT40eJHix8tfrT4AXztBUcPGTw=
   </data>
  </layer>
 </map>
